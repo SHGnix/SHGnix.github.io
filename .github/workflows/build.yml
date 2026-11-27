@@ -97,7 +97,7 @@ jobs:
       - name: Generate Release
         run: |
           apt-ftparchive \
-            -o APT::FTPArchive::Release::Origin="SHGnix" \
+            -o APT::FTPArchive::Release::Origin="SHG Repo" \
             -o APT::FTPArchive::Release::Label="SHG Repo" \
             -o APT::FTPArchive::Release::Suite="stable" \
             -o APT::FTPArchive::Release::Codename="ios" \
