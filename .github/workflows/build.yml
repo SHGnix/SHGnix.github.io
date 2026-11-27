@@ -98,12 +98,12 @@ jobs:
         run: |
           apt-ftparchive \
             -o APT::FTPArchive::Release::Origin="SHGnix" \
-            -o APT::FTPArchive::Release::Label="SHGnix Repo" \
+            -o APT::FTPArchive::Release::Label="SHG Repo" \
             -o APT::FTPArchive::Release::Suite="stable" \
             -o APT::FTPArchive::Release::Codename="ios" \
             -o APT::FTPArchive::Release::Architectures="iphoneos-arm64 iphoneos-arm64e" \
             -o APT::FTPArchive::Release::Components="main" \
-            -o APT::FTPArchive::Release::Description="SHGnix iOS Repository" \
+            -o APT::FTPArchive::Release::Description="SHG Repo iOS Repository" \
             release . > Release
           touch .nojekyll
 

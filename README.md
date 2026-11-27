@@ -1,10 +1,10 @@
-# SHGnix iOS Repository
+# SHG Repo
 
 **Repository author:** SHG  
 **Repository:** <https://github.com/SHGnix/repo>  
 **APT source:** <https://shgnix.github.io/repo/>
 
-SHGnix is a personal iOS jailbreak package repository for Sileo and RootHide-oriented packages.
+SHG Repo is a personal iOS jailbreak package repository for Sileo and RootHide-oriented packages.
 
 ## Add this source in Sileo
 
