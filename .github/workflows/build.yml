@@ -30,9 +30,8 @@ jobs:
 
       - name: Build package display-name and icon revision
         run: |
-          python3 scripts/rebuild-display-package.py \
-            debs/pref-label-keeper_1.3.0-1_SHG_iphoneos-arm64e.deb \
-            debs/pref-label-keeper_1.3.0-2_SHG_iphoneos-arm64e.deb
+          echo "Using packages currently present in debs/"
+          ls -lah debs/*.deb
 
       - name: Fetch SHGnix GitHub avatar as repository icon
         run: |
