@@ -26,9 +26,34 @@ jobs:
       - name: Install tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y dpkg-dev apt-utils
+          sudo apt-get install -y dpkg-dev apt-utils python3-pil
 
-      - name: Extract the package's original icon
+      - name: Build package display-name and icon revision
+        run: |
+          python3 scripts/rebuild-display-package.py \
+            debs/pref-label-keeper_1.3.0-1_SHG_iphoneos-arm64e.deb \
+            debs/pref-label-keeper_1.3.0-2_SHG_iphoneos-arm64e.deb
+
+      - name: Fetch SHGnix GitHub avatar as repository icon
+        run: |
+          curl -fsSL --retry 3 "https://avatars.githubusercontent.com/u/160029720?s=512&v=4" -o /tmp/shgnix-avatar
+          python3 - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+
+          image = Image.open("/tmp/shgnix-avatar").convert("RGBA")
+          width, height = image.size
+          side = min(width, height)
+          left = (width - side) // 2
+          top = (height - side) // 2
+          image = image.crop((left, top, left + side, top + side))
+          image = image.resize((512, 512), Image.Resampling.LANCZOS)
+          image.save("CydiaIcon.png", format="PNG", optimize=True)
+          print("Generated CydiaIcon.png:", Image.open("CydiaIcon.png").size)
+          PY
+          file CydiaIcon.png
+
+      - name: Extract the selected package icon
         run: |
           selected=""
           selected_version=""

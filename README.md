@@ -4,7 +4,7 @@
 **Repository:** <https://github.com/SHGnix/repo>  
 **APT source:** <https://shgnix.github.io/repo/>
 
-SHGnix is a personal iOS jailbreak package repository. The current listing is built for RootHide-oriented packages and is indexed for Sileo.
+SHGnix is a personal iOS jailbreak package repository for Sileo and RootHide-oriented packages.
 
 ## Add this source in Sileo
 
@@ -12,28 +12,34 @@ SHGnix is a personal iOS jailbreak package repository. The current listing is bu
 https://shgnix.github.io/repo/
 ```
 
+The source icon (`CydiaIcon.png`) is generated from the SHGnix GitHub profile avatar during deployment.
+
 ## Available package
 
-| Package | Package ID | Debian version | Plugin version | Notes |
-|---|---|---:|---:|---|
-| 名称保护（RootHide 原生版） | `local.preference-label-keeper` | `1.3.0-1` | `1.3.0` | RootHide 原生版本，安装包说明标注 iOS 15+；`-1` 是打包修订号 |
+| Package | Package ID | Debian version | Plugin version |
+|---|---|---:|---:|
+| 名称保护（Roothide） | `local.preference-label-keeper` | `1.3.0-2` | `1.3.0` |
 
-The package provides a command-line utility. PreferenceLoader is recommended for the optional Settings entry; the command-line component is standalone. See the [package depiction](https://shgnix.github.io/repo/depictions/local.preference-label-keeper.html) for details.
+The package provides a command-line utility and an optional PreferenceLoader Settings entry. See the [package depiction](https://shgnix.github.io/repo/depictions/local.preference-label-keeper.html) for details.
 
 ## Repository layout
 
-- `debs/` — installable Debian packages.
+- `debs/` — versioned Debian packages.
 - `icons/` — package icons served to package managers.
+- `CydiaIcon.png` — repository icon generated from the GitHub profile avatar.
 - `depictions/` — Sileo native JSON and HTML fallback descriptions.
-- `metadata/packages.json` — extra package-index fields such as author, icon, and depiction URLs.
+- `metadata/packages.json` — package author, icon, and depiction URLs.
+- `scripts/rebuild-display-package.py` — creates the display-name/icon packaging revision.
 - `scripts/enrich-packages.py` — injects display metadata and validates the generated APT index.
 - `.github/workflows/build.yml` — builds `Packages`, `Packages.gz`, and `Release`, then publishes GitHub Pages.
-- `CHANGELOG.md` — published package changes.
+- `CHANGELOG.md` — release notes.
 - `RELEASING.md` — release and versioning procedure.
 
-## Publishing a new version
+## Version information
 
-Read [RELEASING.md](RELEASING.md) before adding a new `.deb`. Keep the Debian package identifier stable, increase its version for every new build, append a factual changelog entry, and commit the package to `debs/`. GitHub Actions regenerates the repository indexes automatically.
+The Debian package revision is `1.3.0-2`; the plugin's own version remains `1.3.0`. The suffix `-2` records a package metadata and artwork revision and does not indicate a plugin feature-version change.
+
+Read [RELEASING.md](RELEASING.md) before preparing future releases.
 
 ## Author
 
