@@ -14,9 +14,9 @@ https://shgnix.github.io/repo/
 
 ## Available package
 
-| Package | Package ID | Version | Notes |
-|---|---|---:|---|
-| 名称保护（RootHide 原生版） | `local.preference-label-keeper` | `1.3.0` | RootHide 原生版本，安装包说明标注 iOS 15+ |
+| Package | Package ID | Debian version | Plugin version | Notes |
+|---|---|---:|---:|---|
+| 名称保护（RootHide 原生版） | `local.preference-label-keeper` | `1.3.0-1` | `1.3.0` | RootHide 原生版本，安装包说明标注 iOS 15+；`-1` 是打包修订号 |
 
 The package provides a command-line utility. PreferenceLoader is recommended for the optional Settings entry; the command-line component is standalone. See the [package depiction](https://shgnix.github.io/repo/depictions/local.preference-label-keeper.html) for details.
 
