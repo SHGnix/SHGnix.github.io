@@ -32,7 +32,6 @@ The package provides a command-line utility and an optional PreferenceLoader Set
 - `scripts/rebuild-display-package.py` — creates the display-name/icon packaging revision.
 - `scripts/enrich-packages.py` — injects display metadata and validates the generated APT index.
 - `.github/workflows/build.yml` — builds `Packages`, `Packages.gz`, and `Release`, then publishes GitHub Pages.
-- `CHANGELOG.md` — release notes.
 - `RELEASING.md` — release and versioning procedure.
 
 ## Version information
