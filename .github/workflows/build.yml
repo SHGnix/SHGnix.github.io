@@ -26,7 +26,12 @@ jobs:
       - name: Install tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y dpkg-dev apt-utils
+          sudo apt-get install -y dpkg-dev apt-utils librsvg2-bin
+
+      - name: Render package icons
+        run: |
+          rsvg-convert -w 128 -h 128 icons/pref-label-keeper.svg > icons/pref-label-keeper.png
+          file icons/pref-label-keeper.png
 
       - name: Generate and validate Packages
         run: |
