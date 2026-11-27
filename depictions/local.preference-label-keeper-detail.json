@@ -7,10 +7,6 @@
       "tabname": "详情",
       "views": [
         {
-          "class": "DepictionHeaderView",
-          "title": "名称保护（Roothide）"
-        },
-        {
           "class": "DepictionMarkdownView",
           "markdown": "用于保留的所选插件的偏好设置名称，减少插件更新或刷新后名称被覆盖的情况。"
         }
