@@ -200,7 +200,7 @@
         const dl=$("modalDetails");dl.replaceChildren();
         for(const [label,value] of fields) if(value){const dt=document.createElement("dt");dt.textContent=label;const dd=document.createElement("dd");dd.textContent=value;dl.append(dt,dd);}
         const vl=$("versionList");vl.replaceChildren();
-        for(const v of versions){const row=document.createElement("div");row.className="version-row";const label=document.createElement("span");label.textContent=v.Version+(v.Size?" · "+formatSize(v.Size):"");row.append(label,makeButton("下载","btn",()=>downloadPackage(v)));vl.append(row);}
+        for(const v of versions.slice(0,1)){const row=document.createElement("div");row.className="version-row";const label=document.createElement("span");label.textContent=v.Version+(v.Size?" · "+formatSize(v.Size):"");row.append(label,makeButton("下载","btn",()=>downloadPackage(v)));vl.append(row);}
         $("modalBackdrop").classList.add("open");
       }
       function formatSize(bytes) { const n=Number(bytes); if(!Number.isFinite(n))return bytes+" B"; if(n<1024)return n+" B"; if(n<1048576)return (n/1024).toFixed(1)+" KB";return (n/1048576).toFixed(2)+" MB"; }
