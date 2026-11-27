@@ -20,7 +20,7 @@ The source icon (`CydiaIcon.png`) is generated from the SHGnix GitHub profile av
 |---|---|---:|---:|
 | 名称保护（Roothide） | `local.preference-label-keeper` | `1.3.0-2` | `1.3.0` |
 
-The package provides a command-line utility and an optional PreferenceLoader Settings entry. See the [package depiction](https://shgnix.github.io/repo/depictions/local.preference-label-keeper.html) for details.
+The package provides a command-line utility and an optional PreferenceLoader Settings entry. See the [package depiction](https://shgnix.github.io/repo/depictions/local.preference-label-keeper-1.3.0-2.html) for details.
 
 ## Repository layout
 
