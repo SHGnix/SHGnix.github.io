@@ -1,7 +1,7 @@
 {
   "local.preference-label-keeper": {
-    "Icon": "https://shgnix.github.io/repo/icons/pref-label-keeper.png",
-    "Depiction": "https://shgnix.github.io/repo/depictions/local.preference-label-keeper-detail.html",
-    "SileoDepiction": "https://shgnix.github.io/repo/depictions/local.preference-label-keeper-detail.json"
+    "Icon": "https://shgnix.github.io/icons/pref-label-keeper.png",
+    "Depiction": "https://shgnix.github.io/depictions/local.preference-label-keeper-detail.html",
+    "SileoDepiction": "https://shgnix.github.io/depictions/local.preference-label-keeper-detail.json"
   }
 }
