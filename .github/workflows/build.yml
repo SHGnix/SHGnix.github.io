@@ -27,7 +27,7 @@ jobs:
       - name: Install tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y dpkg-dev
+          sudo apt-get install -y dpkg-dev apt-utils
 
       - name: Generate Packages
         run: |
@@ -37,6 +37,18 @@ jobs:
             touch Packages
           fi
           gzip -9fk Packages
+
+      - name: Generate Release
+        run: |
+          apt-ftparchive \
+            -o APT::FTPArchive::Release::Origin="SHGnix" \
+            -o APT::FTPArchive::Release::Label="SHGnix Repo" \
+            -o APT::FTPArchive::Release::Suite="stable" \
+            -o APT::FTPArchive::Release::Codename="ios" \
+            -o APT::FTPArchive::Release::Architectures="iphoneos-arm64 iphoneos-arm64e" \
+            -o APT::FTPArchive::Release::Components="main" \
+            -o APT::FTPArchive::Release::Description="SHGnix iOS Repository" \
+            release . > Release
           touch .nojekyll
 
       - name: Configure Pages
