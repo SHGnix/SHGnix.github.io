@@ -26,11 +26,35 @@ jobs:
       - name: Install tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y dpkg-dev apt-utils librsvg2-bin
+          sudo apt-get install -y dpkg-dev apt-utils
 
-      - name: Render package icons
+      - name: Extract the package's original icon
         run: |
-          rsvg-convert -w 128 -h 128 icons/pref-label-keeper.svg > icons/pref-label-keeper.png
+          selected=""
+          selected_version=""
+          for deb in debs/*.deb; do
+            [ -f "$deb" ] || continue
+            package="$(dpkg-deb -f "$deb" Package)"
+            version="$(dpkg-deb -f "$deb" Version)"
+            if [ "$package" = "local.preference-label-keeper" ]; then
+              if [ -z "$selected" ] || dpkg --compare-versions "$version" gt "$selected_version"; then
+                selected="$deb"
+                selected_version="$version"
+              fi
+            fi
+          done
+          if [ -z "$selected" ]; then
+            echo "No local.preference-label-keeper package found" >&2
+            exit 1
+          fi
+          mkdir -p /tmp/preference-label-keeper-icon
+          dpkg-deb -x "$selected" /tmp/preference-label-keeper-icon
+          icon="$(find /tmp/preference-label-keeper-icon -path '*/PreferenceLabelKeeper.bundle/icon.png' -print -quit)"
+          if [ -z "$icon" ]; then
+            echo "The selected package does not contain its expected icon.png" >&2
+            exit 1
+          fi
+          install -D "$icon" icons/pref-label-keeper.png
           file icons/pref-label-keeper.png
 
       - name: Generate and validate Packages
