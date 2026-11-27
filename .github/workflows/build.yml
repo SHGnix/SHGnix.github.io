@@ -52,34 +52,14 @@ jobs:
           PY
           file CydiaIcon.png
 
-      - name: Extract the selected package icon
+      - name: Prepare package icon
         run: |
-          selected=""
-          selected_version=""
-          for deb in debs/*.deb; do
-            [ -f "$deb" ] || continue
-            package="$(dpkg-deb -f "$deb" Package)"
-            version="$(dpkg-deb -f "$deb" Version)"
-            if [ "$package" = "local.preference-label-keeper" ]; then
-              if [ -z "$selected" ] || dpkg --compare-versions "$version" gt "$selected_version"; then
-                selected="$deb"
-                selected_version="$version"
-              fi
-            fi
-          done
-          if [ -z "$selected" ]; then
-            echo "No local.preference-label-keeper package found" >&2
-            exit 1
+          mkdir -p icons
+          if [ -f icons/pref-label-keeper.png ]; then
+            echo "Keeping existing repository icon: icons/pref-label-keeper.png"
+          else
+            echo "No existing plugin icon found; continuing without failing the build."
           fi
-          mkdir -p /tmp/preference-label-keeper-icon
-          dpkg-deb -x "$selected" /tmp/preference-label-keeper-icon
-          icon="$(find /tmp/preference-label-keeper-icon -path '*/PreferenceLabelKeeper.bundle/icon.png' -print -quit)"
-          if [ -z "$icon" ]; then
-            echo "The selected package does not contain its expected icon.png" >&2
-            exit 1
-          fi
-          install -D "$icon" icons/pref-label-keeper.png
-          file icons/pref-label-keeper.png
 
       - name: Generate and validate Packages
         run: |
