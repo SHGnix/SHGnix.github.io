@@ -1,1 +1,1 @@
-My Roothide iOS Tweaks Repository
+Place versioned Debian packages (`.deb`) in this directory. Do not replace a published package with different contents under the same version; see the repository-level `RELEASING.md` for the release checklist.

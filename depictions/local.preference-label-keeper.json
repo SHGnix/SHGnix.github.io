@@ -1,0 +1,80 @@
+{
+  "minVersion": "0.4",
+  "class": "DepictionTabView",
+  "tintColor": "#6750A4",
+  "tabs": [
+    {
+      "class": "DepictionStackView",
+      "tabname": "介绍",
+      "views": [
+        {
+          "class": "DepictionHeaderView",
+          "title": "名称保护"
+        },
+        {
+          "class": "DepictionMarkdownView",
+          "markdown": "**RootHide 原生版 · SHG**\n\n用于保留所选插件的偏好设置名称，减少插件更新或刷新后名称被覆盖的情况。"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "版本",
+          "text": "1.3.0"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "作者",
+          "text": "SHG"
+        },
+        {
+          "class": "DepictionTableTextView",
+          "title": "环境",
+          "text": "RootHide · iOS 15+（按安装包说明）"
+        },
+        {
+          "class": "DepictionSubheaderView",
+          "title": "功能说明"
+        },
+        {
+          "class": "DepictionMarkdownView",
+          "markdown": "- 在设置页面选择需要保留名称的项目。\n- 安装或更新插件时可刷新识别列表。\n- 可通过命令行查看状态、恢复记录名称、捕获名称或刷新列表。\n- PreferenceLoader 仅用于提供可选的设置入口；命令行工具独立提供。"
+        },
+        {
+          "class": "DepictionSubheaderView",
+          "title": "命令"
+        },
+        {
+          "class": "DepictionMarkdownView",
+          "markdown": "preference-label-keeper status\npreference-label-keeper restore\npreference-label-keeper capture\npreference-label-keeper refresh\n\n**注意：** 若名称意外被覆盖，请先检查状态；不要在名称已被意外覆盖时执行 `capture`，以免把错误名称写入记录。"
+        },
+        {
+          "class": "DepictionButtonView",
+          "text": "查看 GitHub 仓库",
+          "action": "https://github.com/SHGnix/repo",
+          "openExternal": 1
+        }
+      ]
+    },
+    {
+      "class": "DepictionStackView",
+      "tabname": "更新日志",
+      "views": [
+        {
+          "class": "DepictionHeaderView",
+          "title": "更新日志"
+        },
+        {
+          "class": "DepictionSubheaderView",
+          "title": "1.3.0"
+        },
+        {
+          "class": "DepictionMarkdownView",
+          "markdown": "- RootHide 原生测试版；安装包说明标注 iOS 15+。\n- 提供独立命令行工具与可选 PreferenceLoader 设置入口。\n- 提供 `status`、`restore`、`capture`、`refresh` 命令。\n- 安装包说明注明无需 Python，并保留原有快照和开关兼容性。"
+        },
+        {
+          "class": "DepictionMarkdownView",
+          "markdown": "此仓库目前只提供了 1.3.0 的安装包和对应说明；没有可核实的早期版本记录，因此不列出推测的旧版更新内容。"
+        }
+      ]
+    }
+  ]
+}
