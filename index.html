@@ -3,41 +3,232 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="SHG Repo iOS 软件源，由 SHG 维护，面向 RootHide 与 Sileo。">
-  <title>SHG Repo</title>
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="SHG Repo — 面向 iOS 越狱设备的插件软件源，支持 Sileo 与 RootHide。">
+  <title>SHG Repo · iOS 越狱软件源</title>
   <style>
-    :root{color-scheme:light dark;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-    body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;box-sizing:border-box}
-    main{width:min(100%,680px)}h1{font-size:2rem;margin-bottom:8px}.muted{opacity:.72}
-    .repo-head{display:flex;align-items:center;gap:14px;margin-bottom:20px}
-    .repo-avatar{width:58px;height:58px;border-radius:15px;object-fit:cover}
-    .source{padding:14px 16px;border:1px solid rgba(127,127,127,.35);border-radius:12px;overflow-wrap:anywhere}
-    article{display:flex;gap:16px;align-items:center;padding:18px 0;border-bottom:1px solid rgba(127,127,127,.25)}
-    article img{width:58px;height:58px;border-radius:12px;object-fit:cover}a{color:#8b7bdf}
+    :root{color-scheme:dark;--bg:#080d1b;--panel:rgba(19,28,51,.76);--panel2:#121d35;--text:#eef3ff;--muted:#9ba9c5;--line:rgba(160,180,230,.16);--accent:#8c7bff;--accent2:#42c6e8;--shadow:0 22px 70px rgba(0,0,0,.28)}
+    :root[data-theme="light"]{color-scheme:light;--bg:#f2f5fc;--panel:rgba(255,255,255,.82);--panel2:#fff;--text:#17213a;--muted:#66728b;--line:rgba(52,72,120,.15);--accent:#6555dc;--accent2:#168eaf;--shadow:0 18px 55px rgba(45,60,100,.10)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6;overflow-x:hidden}
+    body:before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse at 12% 8%,rgba(105,88,255,.23),transparent 38%),radial-gradient(ellipse at 88% 25%,rgba(44,190,225,.15),transparent 34%),linear-gradient(145deg,var(--bg),var(--bg))}
+    body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.15;background-image:linear-gradient(rgba(150,170,220,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(150,170,220,.12) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,black,transparent 85%)}
+    a{color:inherit;text-decoration:none}button,input,select{font:inherit}.wrap{width:min(1120px,calc(100% - 36px));margin:auto}
+    .topbar{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.02em}.brand img{width:40px;height:40px;border-radius:12px;object-fit:cover;box-shadow:0 5px 22px rgba(100,100,255,.25)}.brand small{display:block;color:var(--muted);font-size:11px;font-weight:500;letter-spacing:.08em}
+    .icon-btn{width:42px;height:42px;border:1px solid var(--line);border-radius:13px;background:var(--panel);color:var(--text);cursor:pointer;font-size:18px}
+    .hero{padding:76px 0 48px;text-align:center}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid var(--line);border-radius:99px;background:var(--panel);color:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase}.dot{width:7px;height:7px;border-radius:50%;background:#55d6a5;box-shadow:0 0 12px #55d6a5}
+    h1{margin:20px 0 10px;font-size:clamp(42px,8vw,76px);line-height:1.05;letter-spacing:-.055em}.gradient{background:linear-gradient(100deg,#a99aff 10%,#63d7ef 90%);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{max-width:620px;margin:0 auto;color:var(--muted);font-size:16px}
+    .source-card{max-width:760px;margin:32px auto 0;padding:18px;border:1px solid var(--line);border-radius:20px;background:var(--panel);box-shadow:var(--shadow);backdrop-filter:blur(18px);text-align:left}
+    .source-label{color:var(--muted);font-size:12px;margin-bottom:8px}.source-row{display:flex;align-items:center;gap:10px}.source-url{flex:1;min-width:0;overflow-wrap:anywhere;font-family:ui-monospace,SFMono-Regular,monospace;font-size:14px}
+    .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}.btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:11px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel2);color:var(--text);font-weight:650;font-size:13px;cursor:pointer;transition:transform .18s,border-color .18s}.btn:hover{transform:translateY(-2px);border-color:var(--accent)}.btn.primary{border:0;background:linear-gradient(110deg,#7464ef,#3baed1);color:#fff;box-shadow:0 8px 24px rgba(103,99,235,.24)}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin:36px 0 18px}.section-head h2{margin:0;font-size:25px;letter-spacing:-.03em}.section-head p{margin:4px 0 0;color:var(--muted);font-size:13px}.count{color:var(--muted);font-size:12px}
+    .toolbar{display:grid;grid-template-columns:minmax(180px,1fr) 180px 180px auto;gap:10px;margin-bottom:18px}.field{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--text);outline:none}.field:focus{border-color:var(--accent)}select.field option{background:var(--panel2);color:var(--text)}
+    .packages{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.package{padding:18px;border:1px solid var(--line);border-radius:18px;background:var(--panel);backdrop-filter:blur(12px);transition:transform .2s,border-color .2s,box-shadow .2s}.package:hover{transform:translateY(-3px);border-color:rgba(140,123,255,.5);box-shadow:var(--shadow)}
+    .pkg-top{display:flex;gap:14px;align-items:center}.pkg-icon{width:58px;height:58px;flex:0 0 58px;border-radius:15px;object-fit:cover;background:var(--panel2);border:1px solid var(--line)}.pkg-name{font-weight:750;font-size:16px;line-height:1.35;overflow-wrap:anywhere}.pkg-id{color:var(--muted);font-size:11px;overflow-wrap:anywhere;margin-top:3px}.pkg-desc{color:var(--muted);font-size:13px;margin:14px 0;min-height:40px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .meta{display:flex;flex-wrap:wrap;gap:7px}.tag{padding:4px 8px;border:1px solid var(--line);border-radius:8px;color:var(--muted);font-size:11px}.pkg-actions{display:flex;gap:8px;margin-top:15px}.pkg-actions .btn{flex:1;padding:9px 10px}
+    .empty,.loading{grid-column:1/-1;text-align:center;padding:42px 18px;border:1px dashed var(--line);border-radius:18px;color:var(--muted)}
+    .info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin:34px 0 58px}.info{padding:18px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}.info b{display:block;margin-bottom:5px}.info span{color:var(--muted);font-size:12px}
+    footer{padding:24px 0 36px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;text-align:center}footer a{color:var(--text)}
+    .modal-backdrop{position:fixed;inset:0;z-index:10;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(3,7,17,.72);backdrop-filter:blur(8px)}.modal-backdrop.open{display:flex}.modal{width:min(620px,100%);max-height:min(82vh,800px);overflow:auto;padding:22px;border:1px solid var(--line);border-radius:20px;background:var(--panel2);box-shadow:var(--shadow)}.modal-head{display:flex;justify-content:space-between;gap:15px;align-items:start}.modal h3{margin:0;font-size:21px}.close{border:0;background:transparent;color:var(--muted);font-size:25px;cursor:pointer}.modal p{color:var(--muted);font-size:13px}.detail-list{display:grid;grid-template-columns:120px 1fr;gap:8px 12px;margin:18px 0;font-size:13px}.detail-list dt{color:var(--muted)}.detail-list dd{margin:0;overflow-wrap:anywhere}.version-list{display:grid;gap:8px;margin-top:12px}.version-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px;border:1px solid var(--line);border-radius:12px;font-size:13px}
+    .toast{position:fixed;z-index:20;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;pointer-events:none;padding:10px 15px;border-radius:12px;background:#18233e;color:#fff;font-size:13px;transition:.2s;box-shadow:var(--shadow)}.toast.show{opacity:1;transform:translate(-50%,0)}
+    @media(max-width:720px){.hero{padding:58px 0 35px}.toolbar{grid-template-columns:1fr 1fr}.toolbar input{grid-column:1/-1}.packages{grid-template-columns:1fr}.info-grid{grid-template-columns:1fr}.section-head{align-items:start;flex-direction:column}.source-row{align-items:start;flex-direction:column}.source-url{width:100%}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
   </style>
 </head>
 <body>
-  <main>
-    <header class="repo-head">
-      <img class="repo-avatar" src="CydiaIcon.png" alt="SHGnix GitHub 头像">
-      <div>
-        <h1>SHG Repo</h1>
-        <p class="muted">个人 iOS 越狱软件源 · 作者与维护者：SHG</p>
-      </div>
+  <div class="wrap">
+    <nav class="topbar">
+      <a class="brand" href="#">
+        <img src="CydiaIcon.png" alt="SHG Repo">
+        <span>SHG REPO<small>iOS JAILBREAK REPOSITORY</small></span>
+      </a>
+      <button class="icon-btn" id="themeToggle" aria-label="切换主题" title="切换深色/浅色模式">☼</button>
+    </nav>
+
+    <header class="hero">
+      <span class="eyebrow"><i class="dot"></i> PERSONAL REPOSITORY</span>
+      <h1><span class="gradient">SHG Repo</span></h1>
+      <p>一个简洁、轻量的 iOS 越狱插件软件源。为 Sileo 与 RootHide 环境提供插件和更新。</p>
+      <section class="source-card">
+        <div class="source-label">软件源地址 / REPOSITORY URL</div>
+        <div class="source-row"><div class="source-url" id="repoUrl">https://shgnix.github.io/</div><button class="btn" id="copySource">复制地址</button></div>
+        <div class="actions">
+          <a class="btn primary" href="sileo://source/https://shgnix.github.io/">＋ 添加到 Sileo</a>
+          <button class="btn" id="copySource2">复制软件源</button>
+          <a class="btn" href="https://github.com/SHGnix/SHGnix.github.io" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+      </section>
     </header>
-    <h2>添加软件源</h2>
-    <p class="source">https://shgnix.github.io/</p>
-    <p class="muted">在 Sileo 中添加以上地址，然后刷新软件源。</p>
-    <h2>当前插件</h2>
-    <article>
-      <img src="icons/pref-label-keeper.png" alt="名称保护插件图标">
-      <div>
-        <strong>名称保护（Roothide）</strong>
-        <div class="muted">插件版本 1.3.0 · Debian 包版本 1.3.0-2 · 作者 SHG</div>
-        <a href="depictions/local.preference-label-keeper-detail.html">查看插件详情</a>
+
+    <main>
+      <div class="section-head">
+        <div><h2>插件列表</h2><p>自动从软件源索引读取插件信息</p></div>
+        <span class="count" id="packageCount">正在读取…</span>
       </div>
-    </article>
-    <p><a href="https://github.com/SHGnix/SHGnix.github.io">GitHub 仓库</a></p>
-  </main>
+      <div class="toolbar">
+        <input class="field" id="searchInput" type="search" placeholder="搜索插件名称、标识或描述…" aria-label="搜索插件">
+        <select class="field" id="sectionFilter" aria-label="按分类筛选"><option value="">全部分类</option></select>
+        <select class="field" id="archFilter" aria-label="按架构筛选"><option value="">全部架构</option></select>
+        <select class="field" id="sortSelect" aria-label="排序"><option value="name">按名称排序</option><option value="newest">按版本排序</option></select>
+      </div>
+      <div class="packages" id="packageList"><div class="loading">正在加载软件源索引…</div></div>
+
+      <div class="info-grid">
+        <div class="info"><b>快速添加</b><span>点击上方按钮，即可在 Sileo 中添加 SHG Repo。</span></div>
+        <div class="info"><b>自动更新</b><span>插件列表直接读取软件源 Packages 索引。</span></div>
+        <div class="info"><b>专为 iOS</b><span>面向越狱设备与 RootHide / Sileo 使用场景。</span></div>
+      </div>
+    </main>
+    <footer>© <span id="year"></span> SHG Repo · Maintained by SHG · <a href="https://github.com/SHGnix/SHGnix.github.io" target="_blank" rel="noopener">GitHub</a></footer>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <section class="modal">
+      <div class="modal-head"><div><h3 id="modalTitle">插件详情</h3><div class="pkg-id" id="modalId"></div></div><button class="close" id="modalClose" aria-label="关闭">×</button></div>
+      <p id="modalDescription"></p>
+      <dl class="detail-list" id="modalDetails"></dl>
+      <h4>可用版本</h4><div class="version-list" id="versionList"></div>
+    </section>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (() => {
+      "use strict";
+      const REPO_URL = "https://shgnix.github.io/";
+      const $ = (id) => document.getElementById(id);
+      let allPackages = [];
+      let toastTimer;
+
+      function notify(message) {
+        const el = $("toast"); el.textContent = message; el.classList.add("show");
+        clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove("show"), 2200);
+      }
+      async function copyText(value) {
+        try {
+          if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(value);
+          else { const area = document.createElement("textarea"); area.value = value; area.style.position = "fixed"; area.style.opacity = "0"; document.body.appendChild(area); area.select(); document.execCommand("copy"); area.remove(); }
+          notify("已复制到剪贴板");
+        } catch (_) { notify("复制失败，请手动复制软件源地址"); }
+      }
+      function parsePackages(raw) {
+        return raw.replace(/\r/g, "").split(/\n\n+/).map(block => {
+          const item = {};
+          let current = "";
+          for (const line of block.split("\n")) {
+            if (!line.trim()) continue;
+            if (/^\s/.test(line) && current) item[current] = (item[current] || "") + "\n" + line.trim();
+            else {
+              const i = line.indexOf(":");
+              if (i > 0) { current = line.slice(0, i).trim(); item[current] = line.slice(i + 1).trim(); }
+            }
+          }
+          return item;
+        }).filter(item => item.Package && item.Version);
+      }
+      function safeImage(item) {
+        const icon = item.Icon || item.icon || "CydiaIcon.png";
+        try { const u = new URL(icon, REPO_URL); return u.origin === location.origin ? u.href : (icon.startsWith("https://") ? icon : "CydiaIcon.png"); }
+        catch (_) { return "CydiaIcon.png"; }
+      }
+      function unique(values) { return [...new Set(values.filter(Boolean))].sort((a,b) => a.localeCompare(b, "zh-CN")); }
+      function fillFilters() {
+        const sections = unique(allPackages.map(p => p.Section));
+        const arches = unique(allPackages.flatMap(p => (p.Architecture || "").split(/[, ]+/)));
+        for (const value of sections) { const o = document.createElement("option"); o.value = value; o.textContent = value; $("sectionFilter").append(o); }
+        for (const value of arches) { const o = document.createElement("option"); o.value = value; o.textContent = value; $("archFilter").append(o); }
+      }
+      function latestByPackage() {
+        const map = new Map();
+        for (const p of allPackages) {
+          const old = map.get(p.Package);
+          if (!old) map.set(p.Package, p);
+          else if (compareVersions(p.Version, old.Version) > 0) map.set(p.Package, p);
+        }
+        return [...map.values()];
+      }
+      function compareVersions(a,b) {
+        const aa = String(a || "").split(/[.+~:-]/), bb = String(b || "").split(/[.+~:-]/);
+        for (let i=0;i<Math.max(aa.length,bb.length);i++) {
+          const x=aa[i]||"0", y=bb[i]||"0";
+          if (x===y) continue;
+          if (/^\d+$/.test(x) && /^\d+$/.test(y)) return Number(x)>Number(y)?1:-1;
+          return x.localeCompare(y);
+        }
+        return 0;
+      }
+      function makeButton(label, className, handler) {
+        const b=document.createElement("button"); b.type="button"; b.className=className; b.textContent=label; b.addEventListener("click",handler); return b;
+      }
+      function render() {
+        const query=$("searchInput").value.trim().toLocaleLowerCase();
+        const section=$("sectionFilter").value, arch=$("archFilter").value, sort=$("sortSelect").value;
+        let items=latestByPackage().filter(p => {
+          const hay=[p.Package,p.Name,p.Description,p.Section,p.Maintainer].join(" ").toLocaleLowerCase();
+          return (!query || hay.includes(query)) && (!section || p.Section===section) && (!arch || (p.Architecture||"").split(/[, ]+/).includes(arch));
+        });
+        items.sort((a,b) => sort==="newest" ? compareVersions(b.Version,a.Version) : (a.Name||a.Package).localeCompare(b.Name||b.Package,"zh-CN"));
+        $("packageCount").textContent = items.length + " 个插件";
+        const list=$("packageList"); list.replaceChildren();
+        if (!items.length) { const e=document.createElement("div");e.className="empty";e.textContent=allPackages.length?"没有找到符合条件的插件。":"软件源中暂时没有可显示的插件。";list.append(e);return; }
+        for (const p of items) {
+          const card=document.createElement("article");card.className="package";
+          const top=document.createElement("div");top.className="pkg-top";
+          const img=document.createElement("img");img.className="pkg-icon";img.src=safeImage(p);img.alt="";img.onerror=()=>{img.src="CydiaIcon.png";};
+          const heading=document.createElement("div");heading.style.minWidth="0";
+          const name=document.createElement("div");name.className="pkg-name";name.textContent=p.Name||p.Package;
+          const id=document.createElement("div");id.className="pkg-id";id.textContent=p.Package;
+          heading.append(name,id);top.append(img,heading);
+          const desc=document.createElement("p");desc.className="pkg-desc";desc.textContent=p.Description||"暂无插件介绍。";
+          const meta=document.createElement("div");meta.className="meta";
+          for (const value of ["版本 "+p.Version,p.Section||"未分类",p.Architecture||"架构未知"]) {const tag=document.createElement("span");tag.className="tag";tag.textContent=value;meta.append(tag);}
+          const actions=document.createElement("div");actions.className="pkg-actions";
+          actions.append(makeButton("查看详情","btn",()=>openDetails(p)),makeButton("下载 DEB","btn primary",()=>downloadPackage(p)));
+          card.append(top,desc,meta,actions);list.append(card);
+        }
+      }
+      function downloadPackage(p) {
+        if (!p.Filename) { notify("索引中没有提供此插件的下载路径"); return; }
+        try { const url=new URL(p.Filename,REPO_URL); if(url.origin!==location.origin){notify("下载地址无效");return;} window.location.href=url.href; }
+        catch (_) { notify("下载地址无效"); }
+      }
+      function openDetails(p) {
+        const versions=allPackages.filter(x=>x.Package===p.Package).sort((a,b)=>compareVersions(b.Version,a.Version));
+        $("modalTitle").textContent=p.Name||p.Package;$("modalId").textContent=p.Package;
+        $("modalDescription").textContent=p.Description||"暂无插件介绍。";
+        const fields=[["版本",p.Version],["分类",p.Section],["架构",p.Architecture],["安装大小",p.Size?formatSize(p.Size):""],["依赖",p.Depends],["维护者",p.Maintainer],["作者",p.Author]];
+        const dl=$("modalDetails");dl.replaceChildren();
+        for(const [label,value] of fields) if(value){const dt=document.createElement("dt");dt.textContent=label;const dd=document.createElement("dd");dd.textContent=value;dl.append(dt,dd);}
+        const vl=$("versionList");vl.replaceChildren();
+        for(const v of versions){const row=document.createElement("div");row.className="version-row";const label=document.createElement("span");label.textContent=v.Version+(v.Size?" · "+formatSize(v.Size):"");row.append(label,makeButton("下载","btn",()=>downloadPackage(v)));vl.append(row);}
+        $("modalBackdrop").classList.add("open");
+      }
+      function formatSize(bytes) { const n=Number(bytes); if(!Number.isFinite(n))return bytes+" B"; if(n<1024)return n+" B"; if(n<1048576)return (n/1024).toFixed(1)+" KB";return (n/1048576).toFixed(2)+" MB"; }
+      async function loadPackages() {
+        try {
+          const response=await fetch(REPO_URL+"Packages",{cache:"no-store"});
+          if(!response.ok) throw new Error("HTTP "+response.status);
+          allPackages=parsePackages(await response.text());
+          fillFilters();render();
+        } catch(error) {
+          $("packageCount").textContent="读取失败";
+          const box=document.createElement("div");box.className="empty";box.textContent="暂时无法读取 Packages 索引。请稍后刷新页面，或直接在 Sileo 中刷新软件源。";
+          $("packageList").replaceChildren(box);
+        }
+      }
+      const savedTheme=localStorage.getItem("shg-theme");
+      if(savedTheme==="light"||savedTheme==="dark")document.documentElement.dataset.theme=savedTheme;
+      function updateThemeIcon(){ $("themeToggle").textContent=document.documentElement.dataset.theme==="light"?"☾":"☼"; }
+      $("themeToggle").addEventListener("click",()=>{const next=document.documentElement.dataset.theme==="light"?"dark":"light";document.documentElement.dataset.theme=next;localStorage.setItem("shg-theme",next);updateThemeIcon();});
+      updateThemeIcon();
+      $("copySource").addEventListener("click",()=>copyText(REPO_URL));$("copySource2").addEventListener("click",()=>copyText(REPO_URL));
+      ["searchInput","sectionFilter","archFilter","sortSelect"].forEach(id=>$(id).addEventListener(id==="searchInput"?"input":"change",render));
+      $("modalClose").addEventListener("click",()=>$("modalBackdrop").classList.remove("open"));
+      $("modalBackdrop").addEventListener("click",e=>{if(e.target===$("modalBackdrop"))$("modalBackdrop").classList.remove("open");});
+      document.addEventListener("keydown",e=>{if(e.key==="Escape")$("modalBackdrop").classList.remove("open");});
+      $("year").textContent=new Date().getFullYear();
+      loadPackages();
+    })();
+  </script>
 </body>
 </html>
